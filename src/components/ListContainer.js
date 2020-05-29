@@ -17,23 +17,20 @@ import axios from "axios";
 const useStyles = makeStyles({
   container: {
     position: 'relative',
-    top: "200px"
+    top: "100px",
+    backgroundColor: "#FFFFFF",
+    boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
+    borderRadius: "5px"
   },
   root: {
     width: '100%',
     margin: '0 auto'
-  },
-  checkbox: {
-    borderRadius: '10px'
-  },
-  inputContainer: {
-    width: '80%'
-  },
+  }
 })
 
 export const ListContainer = () => {
   const classes = useStyles()
-  const [ list, setList ] = useState(todoList)
+  const [ list, setList ] = useState([])
   const [ checked, setChecked ] = useState([])
 
   useEffect(() => {
@@ -44,24 +41,32 @@ export const ListContainer = () => {
       })
   }, [])
 
+
+  //control checked state and 
   const handleToggle = (task) => {
-    if (!checked.includes(task)){
+    const updatedTask = { ...task, completed: true }
 
-      console.log(checked)
-      return setChecked([...checked, task])
-    }
+    const updatedList = list.map(el => {
+      if (el.id === task.id) {
+        return updatedTask
+      }
+      return el 
+    })
 
-    setChecked(checked.filter(el => el.id !== task.id))
+    setList(updatedList)
+    axios
+      .put(`http://localhost:8000/api/tasks/${task.id}`, updatedTask)
+      .then(res => {
+        console.log(res)
+      })
   }
 
   const handleSubmit = (e, task) => {
     e.preventDefault()
-    console.log(task)
 
     axios
       .post('http://localhost:8000/api/tasks', task)
       .then(res => {
-        
         setList([ ...list, res.data])
       })
   }
@@ -72,11 +77,15 @@ export const ListContainer = () => {
       <List className={classes.root}>
         {list.map((el, i) => {
           return (
-            <ListItem key={el.id} onClick={() => handleToggle(el)} >
+            <ListItem 
+              key={el.id} 
+              onClick={() => handleToggle(el)} 
+              disabled={el.completed}
+              >
               <ListItemIcon>
                 <Checkbox 
                   className={classes.checkbox}
-                  checked={checked.includes(el)}
+                  checked={el.completed}
                 />
               </ListItemIcon>
               <ListItemText primary={el.task} />

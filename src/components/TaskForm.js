@@ -20,7 +20,8 @@ const useStyles = makeStyles({
 
 const initialState = {
   userId: 1,
-  task: ''
+  task: '',
+  completed: false
 }
 
 export const TaskForm = ({ handleSubmit }) => {
@@ -59,7 +60,7 @@ export const TaskForm = ({ handleSubmit }) => {
           type="submit"
           color="primary"
           variant="outlined"
-          disableRipple="true"
+          disableRipple={true}
           >
             Add Task
           </Button>
