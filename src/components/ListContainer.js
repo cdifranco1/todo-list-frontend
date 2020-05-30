@@ -1,18 +1,11 @@
 import React, { useState, useEffect } from "react"
 import { TaskForm } from './TaskForm'
-import CommentModal from "./CommentModal"
 
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container'
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import ListItemText from '@material-ui/core/ListItemText';
-import Checkbox from '@material-ui/core/Checkbox';
-import IconButton from '@material-ui/core/IconButton';
+import ListItem from "./ListItem"
 import Button from '@material-ui/core/Button';
-import CommentIcon from '@material-ui/icons/Comment';
 import axios from "axios";
 
 
@@ -47,8 +40,6 @@ export const ListContainer = () => {
       })
   }, [])
 
-
-  //control checked state and 
   const handleToggle = (task) => {
     const updatedTask = { ...task, completed: !task.completed }
 
@@ -61,16 +52,18 @@ export const ListContainer = () => {
 
     setList(updatedList)
 
+    handleUpdate(updatedTask)
+  }
+
+  const handleUpdate = (task) => {
     axios
-      .put(`http://localhost:8000/api/tasks/${task.id}`, updatedTask)
+      .put(`http://localhost:8000/api/tasks/${task.id}`, task)
       .then(res => {
         console.log(res)
       })
   }
 
-  const handleSubmit = (e, task) => {
-    e.preventDefault()
-
+  const handleSubmit = (task) => {
     axios
       .post('http://localhost:8000/api/tasks', task)
       .then(res => {
@@ -79,7 +72,6 @@ export const ListContainer = () => {
   }
 
   const clearCompleted = () => {
-    
     axios
     .delete('http://localhost:8000/api/tasks/batch/1')
     .then(res => {
@@ -92,30 +84,13 @@ export const ListContainer = () => {
       <TaskForm handleSubmit={handleSubmit} />
       <List className={classes.root}>
         {list.map((el, i) => {
-          return (
-            <ListItem
-              className={classes.listItem} 
-              key={el.id} 
-              
-              disabled={el.completed}
-              >
-              <ListItemIcon>
-                <Checkbox 
-                  color="primary"
-                  className={classes.checkbox}
-                  checked={el.completed}
-                  onClick={() => handleToggle(el)} 
-                />
-              </ListItemIcon>
-              <ListItemText primary={el.task} />
-              <CommentModal />
-              <ListItemSecondaryAction>
-                <IconButton  onClick={toggleOpen} >
-                  <CommentIcon />
-                </IconButton>
-              </ListItemSecondaryAction>
-            </ListItem>
-          )
+          return <ListItem
+                    handleUpdate={handleUpdate}
+                    key={el.id}
+                    task={el}
+                    handleToggle={handleToggle}
+                    // handleChange={handleChange}
+                  />
         })}
       </List>
       {!list.every(el => el.completed === false) && 

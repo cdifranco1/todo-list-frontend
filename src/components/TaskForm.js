@@ -21,7 +21,7 @@ const useStyles = makeStyles({
 const initialState = {
   userId: 1,
   task: '',
-  completed: false
+  completed: false,
 }
 
 export const TaskForm = ({ handleSubmit }) => {
@@ -38,7 +38,7 @@ export const TaskForm = ({ handleSubmit }) => {
   const onSubmit = (e) => {
     e.preventDefault()
 
-    handleSubmit(e, task)
+    handleSubmit(task)
     setTask(initialState)
   }
 
