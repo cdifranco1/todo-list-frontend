@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react"
-import CommentModal from "./CommentModal"
-import { makeStyles } from '@material-ui/core/styles';
-import DialogContent from '@material-ui/core/DialogContent'
 import { TaskForm } from './TaskForm'
+import CommentModal from "./CommentModal"
+
+import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container'
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -14,7 +14,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 import CommentIcon from '@material-ui/icons/Comment';
 import axios from "axios";
-import { Modal } from "@material-ui/core";
+
 
 
 const useStyles = makeStyles({
@@ -36,7 +36,6 @@ const useStyles = makeStyles({
 })
 
 export const ListContainer = () => {
-  const [ open, setOpen ] = useState(false)
   const classes = useStyles()
   const [ list, setList ] = useState([])
 
@@ -47,10 +46,6 @@ export const ListContainer = () => {
         setList(res.data)
       })
   }, [])
-
-  const toggleOpen = () => {
-    setOpen(!open)
-  }
 
 
   //control checked state and 
@@ -113,15 +108,7 @@ export const ListContainer = () => {
                 />
               </ListItemIcon>
               <ListItemText primary={el.task} />
-              <Modal
-                open={open}
-                onClose={toggleOpen}
-                aria-labelledby="simple-modal-title"
-                aria-describedby="simple-modal-description"
-                style={{ opacity: '0.2'}}
-              >
-                <CommentModal />
-              </Modal>
+              <CommentModal />
               <ListItemSecondaryAction>
                 <IconButton  onClick={toggleOpen} >
                   <CommentIcon />
