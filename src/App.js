@@ -9,14 +9,16 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
   h1: {
-    fontSize: "4rem",
+    fontSize: "3rem",
     color: "#2b6cb0",
     backgroundColor: "#FFFFFF",
     padding: "2%",
     boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
     textAlign: "center",
-    borderRadius: '5px'
-  }
+    borderRadius: '5px',
+    width: "70%",
+    margin: "3% auto"
+  },
 })
 
 function App() {

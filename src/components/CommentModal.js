@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => {
       opacity: "0.2"
     },
     paper: {
-      width: "50%",
+      width: "40%",
       backgroundColor: theme.palette.background.paper,
       border: '2px solid #000',
       boxShadow: theme.shadows[5],
@@ -22,19 +22,21 @@ const useStyles = makeStyles((theme) => {
     },
     button: {
       padding: "2%",
-      margin: "2% 0"
+      margin: "2% 0",
+      fontSize: "0.75rem"
     },
     heading: {
       padding: "2% 0",
       marginBottom: "3%",
-      fontSize: "2rem"
+      fontSize: "1.25rem",
+      fontWeight: "600"
     }, 
     input: {
-      fontSize: "1.5rem",
+      fontSize: "1.15rem",
       padding: "3% 1%",
     },
     label: {
-      fontSize: "1.5rem",
+      fontSize: "1.0rem",
       padding: "0.5% 0"
     }
   }
