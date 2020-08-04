@@ -12,7 +12,6 @@ import CommentIcon from '@material-ui/icons/Comment';
 
 const Task = ({ handleToggle, task, handleUpdate }) => { 
   const [ open, setOpen ] = useState(false)
-  console.log(task)
 
   const toggleOpen = () => {
     setOpen(!open)

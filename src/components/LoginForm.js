@@ -106,7 +106,6 @@ export const Login = (props) => {
       return axiosInstance()
               .post('/api/users/register', formValues)
               .then(res => {
-                  console.log(res)
                   history.push('/')
               })
     }
