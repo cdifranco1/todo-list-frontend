@@ -1,6 +1,8 @@
 import React from 'react';
-import { ListContainer } from './components/ListContainer'
+import { ListContainer } from './components/ListContainer';
+import Login from './components/LoginForm';
 import './App.css';
+import { Route } from "react-router-dom";
 import { Container } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -23,7 +25,11 @@ function App() {
   return (
     <Container>
       <h1 className={classes.h1}>Another To-Do List</h1>
-      <ListContainer />
+      <Route exact path="/" component={Login} />
+      <Route exact path="/register" >
+        <Login registration />
+      </Route>
+      <Route path="/home" component={ListContainer} />
     </Container>
   );
 }

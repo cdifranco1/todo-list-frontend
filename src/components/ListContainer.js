@@ -7,6 +7,7 @@ import List from '@material-ui/core/List';
 import ListItem from "./ListItem"
 import Button from '@material-ui/core/Button';
 import axios from "axios";
+import { axiosInstance } from "../axios";
 
 
 
@@ -33,8 +34,8 @@ export const ListContainer = () => {
   const [ list, setList ] = useState([])
 
   useEffect(() => {
-    axios
-      .get("http://localhost:8000/api/tasks")
+    axiosInstance()
+      .get("/api/tasks")
       .then(res => {
         setList(res.data)
       })
@@ -56,24 +57,24 @@ export const ListContainer = () => {
   }
 
   const handleUpdate = (task) => {
-    axios
-      .put(`http://localhost:8000/api/tasks/${task.id}`, task)
+    axiosInstance()
+      .put(`/api/tasks/${task.id}`, task)
       .then(res => {
         console.log(res)
       })
   }
 
   const handleSubmit = (task) => {
-    axios
-      .post('http://localhost:8000/api/tasks', task)
+    axiosInstance()
+      .post('/api/tasks', task)
       .then(res => {
         setList([ ...list, res.data])
       })
   }
 
   const clearCompleted = () => {
-    axios
-    .delete('http://localhost:8000/api/tasks/batch/1')
+    axiosInstance()
+    .delete('/api/tasks/batch/1')
     .then(res => {
       if (res.data > 0) setList(list.filter(el => !el.completed))
     })

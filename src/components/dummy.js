@@ -17,6 +17,5 @@ const createList = (range) => {
 }
 
 const list = createList(5)
-console.log(list)
 
 export default list 
