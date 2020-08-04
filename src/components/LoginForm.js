@@ -82,8 +82,6 @@ export const Login = (props) => {
       ...touched,
       [e.target.name] : true
     })
-
-    console.log(touched)
   }
 
   const handleChange = (e) => {
@@ -99,8 +97,6 @@ export const Login = (props) => {
         required: validators.required(e.target.value)
       }
     })
-
-    console.log(validationErrors)
   }
 
   const handleSubmit = (e) => {
