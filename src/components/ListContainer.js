@@ -6,7 +6,6 @@ import Container from '@material-ui/core/Container'
 import List from '@material-ui/core/List';
 import ListItem from "./ListItem"
 import Button from '@material-ui/core/Button';
-import axios from "axios";
 import { axiosInstance } from "../axios";
 
 

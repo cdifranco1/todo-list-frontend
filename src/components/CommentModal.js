@@ -68,7 +68,6 @@ const CommentModal = ({ toggleOpen, open, task, handleUpdate }) => {
       ...formValues,
       [e.target.name] : e.target.value
     })
-    console.log(formValues)
   }
 
   return (
