@@ -33,7 +33,6 @@ const Nav = (props) => {
     axiosInstance()
       .get("/api/users/auth")
       .then(res => {
-        console.log(res)
         setAuthenticated(true)
       })
       .catch(err => console.log(err))

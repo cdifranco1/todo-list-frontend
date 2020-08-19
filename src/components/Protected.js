@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from "react"
 import { useHistory } from "react-router-dom"
-
+import { axiosInstance } from "../axios"
 
 const Protected = ({ children }) => {
   const [ authenticated, setAuthenticated ] = useState(false)
   const history = useHistory()
 
   useEffect(() => {
-    const jwt = localStorage.getItem("token")
-    
-    if (jwt){
-      setAuthenticated(true)
-    } else {
-      history.push("/")
-    }
+    axiosInstance()
+      .get("/api/users/auth")
+      .then(res => {
+        setAuthenticated(true)
+      })
+      .catch(err => {
+        history.push("/")
+      })
   }, [])
 
   return (
