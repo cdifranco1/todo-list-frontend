@@ -48,10 +48,8 @@ const validators = {
   required: (value) => value.length === 0
 }
 
-// const createValidator = (type) => validators[type]
 
-
-export const Login = (props) => {
+export const Login = ({ registration, setAuthenticated }) => {
   const classes = useStyles()
   const history = useHistory()
   const [ isAuthError, setIsAuthError ] = useState(false)
@@ -102,7 +100,7 @@ export const Login = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    if (props.registration){
+    if (registration){
       return axiosInstance()
               .post('/api/users/register', formValues)
               .then(res => {
@@ -113,6 +111,7 @@ export const Login = (props) => {
     axiosInstance()
         .post('/api/users/login', formValues)
         .then(res => {
+          localStorage.setItem("token", res.data.token)
           history.push('/home')
         })
         .catch(err => {
@@ -126,7 +125,7 @@ export const Login = (props) => {
         className={classes.form}
         onSubmit={handleSubmit} 
       >
-        <h1 className={classes.heading}>{props.registration ? "Register" : "Login"}</h1>
+        <h1 className={classes.heading}>{registration ? "Register" : "Login"}</h1>
           
           <TextField
             fullWidth
@@ -135,7 +134,7 @@ export const Login = (props) => {
             className={classes.textField} 
             name="username" 
             placeholder="Username"
-            helperText={props.registration ? (touched.username && ((validationErrors.username.required && "Username is required.") || (validationErrors.username.minLength && "Username must be at least 3 characters."))) : isAuthError && authErrorMessage}   
+            helperText={registration ? (touched.username && ((validationErrors.username.required && "Username is required.") || (validationErrors.username.minLength && "Username must be at least 3 characters."))) : isAuthError && authErrorMessage}   
           />
 
           <TextField
@@ -146,7 +145,7 @@ export const Login = (props) => {
             type="password" 
             name="password" 
             placeholder="Password"
-            helperText={props.registration ? (touched.password && ( (validationErrors.password.required && "Password is required.") || (validationErrors.password.minLength && "Password must be at least 5 characters."))) : isAuthError && authErrorMessage} 
+            helperText={registration ? (touched.password && ( (validationErrors.password.required && "Password is required.") || (validationErrors.password.minLength && "Password must be at least 5 characters."))) : isAuthError && authErrorMessage} 
           />
 
           <Button 
@@ -154,7 +153,7 @@ export const Login = (props) => {
             variant="contained"
             className={classes.button}
             >
-              {props.registration ? "Register" : "Login"}
+              {registration ? "Register" : "Login"}
           </Button>
 
           <div className={classes.navDiv}>

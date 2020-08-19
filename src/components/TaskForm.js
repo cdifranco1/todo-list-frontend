@@ -19,7 +19,7 @@ const useStyles = makeStyles({
 })
 
 const initialState = {
-  userId: 1,
+  userId: '',
   task: '',
   completed: false,
 }

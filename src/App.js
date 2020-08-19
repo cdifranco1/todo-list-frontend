@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ListContainer } from './components/ListContainer';
+import Protected from './components/Protected';
 import Login from './components/LoginForm';
+import Nav from './components/Nav';
 import './App.css';
 import { Route } from "react-router-dom";
 import { Container } from '@material-ui/core';
@@ -25,14 +27,21 @@ function App() {
   const classes = useStyles()
 
   return (
-    <Container>
-      <h1 className={classes.h1}>Another To-Do List</h1>
-      <Route exact path="/" component={Login} />
-      <Route exact path="/register" >
-        <Login registration />
-      </Route>
-      <Route path="/home" component={ListContainer} />
-    </Container>
+    <>
+      <Nav />
+      <Container>
+        <h1 className={classes.h1}>Another To-Do List</h1>
+        <Route exact path="/" component={Login} />
+        <Route exact path="/register" >
+          <Login registration />
+        </Route>
+        <Route path="/home">
+          <Protected>
+            <ListContainer />
+          </Protected>
+        </Route>
+      </Container>
+    </>
   );
 }
 

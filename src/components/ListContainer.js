@@ -74,7 +74,7 @@ export const ListContainer = () => {
 
   const clearCompleted = () => {
     axiosInstance()
-    .delete('/api/tasks/batch/1')
+    .delete('/api/tasks/batch')
     .then(res => {
       if (res.data > 0) setList(list.filter(el => !el.completed))
     })
