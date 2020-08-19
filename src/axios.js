@@ -10,7 +10,7 @@ export const axiosInstance = () => {
     headers: { 
       'Authorization': token
     },
-    baseURL: devURL,
+    baseURL: prodURL,
     withCredentials: true
   })
 }
