@@ -88,10 +88,17 @@ export const Login = ({ registration, setAuthenticated }) => {
       [ e.target.name ] : e.target.value
     })
 
+    let minLength;
+    if (e.target.name === "username"){
+      minLength = 3
+    } else {
+      minLength = 5
+    }
+
     setValidationErrors({
       ...validationErrors,
       [ e.target.name ] : {
-        minLength: validators.minLength(e.target.value, 5),
+        minLength: validators.minLength(e.target.value, minLength),
         required: validators.required(e.target.value)
       }
     })

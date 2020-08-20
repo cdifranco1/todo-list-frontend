@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { NavLink, useHistory, useRouteMatch, useLocation } from "react-router-dom"
+import { useHistory, useLocation } from "react-router-dom"
 import { axiosInstance } from "../axios"
 
 const styles = {
@@ -13,7 +13,10 @@ const styles = {
     borderRadius: "5px",
     border: "1px solid blue",
     color: "white",
-    backgroundColor: "#2b6cb0"
+    backgroundColor: "#2b6cb0",
+    "&:hover": {
+      cursor: "pointer"
+    } 
   }
 }
 
@@ -42,9 +45,7 @@ const Nav = (props) => {
     <div style={styles.container}>
       {authenticated ?
       <button style={styles.button} onClick={handleLogout}>Logout</button> :
-      <NavLink exact to="/">
-        <button style={styles.button}>Login</button> 
-      </NavLink>}
+      null}
     </div>
   )
 }

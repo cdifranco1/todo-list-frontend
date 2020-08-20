@@ -15,7 +15,7 @@ const Protected = ({ children }) => {
       .catch(err => {
         history.push("/")
       })
-  }, [])
+  }, [history])
 
   return (
     authenticated ?

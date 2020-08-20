@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { ListContainer } from './components/ListContainer';
 import Protected from './components/Protected';
 import Login from './components/LoginForm';
@@ -20,7 +20,7 @@ const useStyles = makeStyles({
     borderRadius: '5px',
     width: "70%",
     margin: "3% auto"
-  },
+  }
 })
 
 function App() {
